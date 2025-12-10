@@ -64,15 +64,15 @@ size_t da_get(DynamicArray *array, size_t index) {
 }
 
 void da_set(DynamicArray *array, size_t index, int value) {
-  if (index > array->size || index > array->capacity)
+  if (index >= array->size)
     return;
   array->value[index] = value;
 }
 
 void da_remove(DynamicArray *array, size_t index) {
-  if (index > array->size)
+  if (index >= array->size)
     return;
-  if (index == array->size) {
+  if (index == array->size - 1) {
     da_pop(array);
   } else {
     memcpy(&array->value[index], &array->value[index + 1],

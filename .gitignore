@@ -1,3 +1,6 @@
 *.o
 *.exe
 build/
+Makefile
+test.c
+main.c

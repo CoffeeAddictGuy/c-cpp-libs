@@ -56,12 +56,14 @@ void da_pop(DynamicArray *array) {
   array->size = tSize - 1;
 }
 
-size_t da_get(DynamicArray *array, size_t index) {
-
+Result da_get(DynamicArray *array, size_t index) {
+  Result result;
   if (index < array->size) {
-    return array->value[index];
+    result = (Result){0, array->value[index]};
+    return result;
   }
-  return NULL;
+  result = (Result){-1, 0};
+  return result;
 }
 
 void da_set(DynamicArray *array, size_t index, int value) {

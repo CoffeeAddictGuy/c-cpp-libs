@@ -12,12 +12,17 @@ typedef struct {
   size_t capacity;
 } DynamicArray;
 
+typedef struct {
+  int code;
+  int result;
+} Result;
+
 DynamicArray *da_init(size_t capacity);
 void da_push(DynamicArray *array, int value);
 void da_pop(DynamicArray *array);
 void da_free(DynamicArray *array);
 
-size_t da_get(DynamicArray *array, size_t index);
+Result da_get(DynamicArray *array, size_t index);
 void da_set(DynamicArray *array, size_t index, int value);
 void da_insert(DynamicArray *array, size_t index, int value);
 void da_remove(DynamicArray *array, size_t index);

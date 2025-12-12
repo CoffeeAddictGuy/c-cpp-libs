@@ -141,7 +141,6 @@ size_t bst_sum(BST *bst) {
   size_t left = bst_sum(bst->left);
   size_t right = bst_sum(bst->right);
   size_t res = bst->value;
-  printf("left %lld, right %lld and res %lld\n", left, right, res);
 
   return res + left + right;
 }

@@ -1,4 +1,5 @@
 #include "bst.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -37,6 +38,16 @@ BST *bst_search(BST *bst, int value) {
   } else {
     return bst;
   }
+}
+
+int bst_height(BST *bst) {
+  if (bst == NULL) {
+    return 0;
+  }
+  int left_height = bst_height(bst->left);
+  int right_height = bst_height(bst->right);
+
+  return 1 + (left_height > right_height ? left_height : right_height);
 }
 
 int bst_min(BST *bst) {

@@ -8,13 +8,13 @@ typedef struct BinarySearchTree {
 BST *bst_init(int value);
 BST *bst_insert(BST *bst, int value);
 BST *bst_search(BST *bst, int value);
-BST *bst_delete_element(BST *bst, int value); // todo
+BST *bst_delete(BST *bst, int value); // todo
 
 void bst_inorder(BST *bst);
 void bst_preorder(BST *bst);
 void bst_postorder(BST *bst);
 
-void bst_height(BST *bst); // todo
+int bst_height(BST *bst);
 int bst_min(BST *bst);
 int bst_max(BST *bst);
 

@@ -61,4 +61,20 @@ void bst_inorder(BST *bst) {
   }
 }
 
+void bst_preorder(BST *bst) {
+  if (bst != NULL) {
+    printf("%d\n", bst->value);
+    bst_preorder(bst->left);
+    bst_preorder(bst->right);
+  }
+}
+
+void bst_postorder(BST *bst) {
+  if (bst != NULL) {
+    bst_postorder(bst->left);
+    bst_postorder(bst->right);
+    printf("%d\n", bst->value);
+  }
+}
+
 void bst_free(BST *bst) { free(bst); }

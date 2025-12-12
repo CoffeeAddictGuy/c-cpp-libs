@@ -11,8 +11,8 @@ BST *bst_search(BST *bst, int value);
 BST *bst_delete_element(BST *bst, int value); // todo
 
 void bst_inorder(BST *bst);
-void bst_preorder(BST *bst);  // todo
-void bst_postorder(BST *bst); // todo
+void bst_preorder(BST *bst);
+void bst_postorder(BST *bst);
 
 void bst_height(BST *bst); // todo
 int bst_min(BST *bst);

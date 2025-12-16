@@ -44,13 +44,21 @@ void heap_insert(MinHeap *heap, int value) {
   heapify_up(heap, heap->size - 1);
 }
 
+int heap_extract_min(MinHeap *heap) {
+  int t = heap->data[0];
+  int last = heap->data[heap->size - 1];
+  heap->data[0] = last;
+  heap->size = heap->size - 1;
+  heapify_down(heap, 0);
+  return t;
+}
+
 void heapify_up(MinHeap *heap, size_t index) {
   if (index == 0) {
     return;
   }
 
   size_t p_index = (index - 1) / 2;
-  // printf("p_index - %lld and value - %d\n", p_index, heap->data[index]);
   if (heap->data[p_index] > heap->data[index]) {
     int t = heap->data[p_index];
     heap->data[p_index] = heap->data[index];
@@ -59,9 +67,49 @@ void heapify_up(MinHeap *heap, size_t index) {
   }
 }
 
+void heapify_down(MinHeap *heap, size_t index) {
+  size_t p = index;
+  size_t l_c = (2 * index) + 1;
+  size_t r_c = (2 * index) + 2;
+  if (l_c >= heap->size) {
+    return;
+  }
+
+  if (r_c < heap->size) {
+    if (heap->data[p] < heap->data[l_c] && heap->data[p] < heap->data[r_c]) {
+      return;
+    }
+  } else {
+    if (heap->data[p] < heap->data[l_c]) {
+      return;
+    }
+  }
+
+  size_t lowest = 0;
+  if (r_c < heap->size) { // two child
+    lowest = (heap->data[l_c] > heap->data[r_c]) ? r_c : l_c;
+  } else { // one child
+    if (l_c < heap->size) {
+      lowest = l_c;
+    } else {
+      lowest = r_c;
+    }
+  }
+  int t = heap->data[p];
+  heap->data[p] = heap->data[lowest];
+  heap->data[lowest] = t;
+  heapify_down(heap, lowest);
+}
+
 void heap_print(MinHeap *heap) {
+  // printf("Index : Value\n");
   for (size_t i = 0; i < heap->size; i++) {
     printf("%d ", heap->data[i]);
   }
   printf("\n");
+}
+
+void heap_free(MinHeap *heap) {
+  free(heap->data);
+  free(heap);
 }

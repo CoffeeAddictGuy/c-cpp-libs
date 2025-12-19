@@ -1,22 +1,35 @@
-# My C/C++ Utility Libraries
+# DSA Core
 
-Набор самописных header-only и не только библиотек для C/C++, содержащих полезные структуры данных и утилиты для упрощения разработки.
-
-Структура проекта
-
+**Data Structures & Algorithms** - набор самописных реализаций ключевых структур данных и алгоритмов на C.
 
 ## Структура проекта
+```
+dsa-core/
+├── data_structures/ # Структуры данных
+├── algorithms/ # Алгоритмы
+├── Makefile
+├── README.md
+└── .gitignore
+```
 
-| Файл | Описание | Ссылка |
+| Структура | Описание | Ссылка |
 |------|----------|--------|
-| `mylinkedlist.h` | Односвязные списки | [Открыть](mylinkedlist.h) |
-| `dncr.{c.h}` | Динамический массив | [Открыть](dncr.c) |
-| `stk.{c.h}` | Стек | [Открыть](src/stk.c) |
-| `que.{c.h}` | Очередь | [Открыть](src/que.c) |
-| `bst.{c.h}` | Бинарное дерево поиска | [Открыть](src/bst.c) |
-| `hp.{c.h}` | Куча | [Открыть](src/hp.c) |
-| `ht_chaining.{c.h}` | Hash Table Chaining | [Открыть](src/ht_chaining.c) |
-| `ht_oa.{c.h}` | Hash Table Open Addressing | [Открыть](src/ht_oa.c) |
-| `mylittlelib.h` | Математические утилиты | [Открыть](mylittlelib.h) |
-| `mysortlib.h` | Утилиты для сортировки | [Открыть](mysortlib.h) |
-| `DOC.md` | Документация | [Открыть](DOC.md) |
+| **Linked List** | Односвязный список | [Открыть](data_structures/linked_list/) |
+| **Vector** | Динамический массив с автоматическим расширением | [Открыть](data_structures/vector/) |
+| **Stack** | Стек (LIFO) | [Открыть](data_structures/stack/) |
+| **Queue** | Очередь (FIFO) с циклическим буфером | [Открыть](data_structures/queue/) |
+| **Binary Search Tree** | BST с вставкой, удалением, обходами | [Открыть](data_structures/bst/) |
+| **Heap** | Min-Heap с heapify операциями | [Открыть](data_structures/heap/) |
+| **Hash Table (Chaining)** | Хеш-таблица с методом цепочек | [Открыть](data_structures/hash_table_chain/) |
+| **Hash Table (Open Addressing)** | Хеш-таблица с линейным пробированием и ресайзом | [Открыть](data_structures/hash_table_oa/) |
+
+
+## Algorithms
+
+В будущем.
+
+## Требования
+
+- **C99** или выше
+- **GCC** или **Clang**
+- **Make**

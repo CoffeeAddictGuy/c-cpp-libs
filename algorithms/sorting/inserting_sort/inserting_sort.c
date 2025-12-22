@@ -12,12 +12,22 @@ void inserting_sort(int *array, size_t size) {
   }
 }
 
+bool is_sorted(int *array, size_t size) {
+  for (size_t i = 1; i < size; i++) {
+    if (array[i] < array[i - 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 void array_print(int *array, size_t size) {
+  printf("[");
   for (size_t i = 0; i < size; i++) {
     if (i != size - 1) {
       printf("%d -> ", array[i]);
     } else {
-      printf("%d\n", array[i]);
+      printf("%d]\n", array[i]);
     }
   }
 }

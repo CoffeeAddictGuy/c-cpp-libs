@@ -26,7 +26,15 @@ dsa-core/
 
 ## Algorithms
 
-В будущем.
+| Алгоритм | Описание | Ссылка |
+|------|----------|--------|
+| **Bubble Sort** | Сортировка пузырьком | [Открыть](algorithms/sorting/bubble_sort/) |
+| **Inserting Sort** | Сортировка вставкой | [Открыть](algorithms/sorting/inserting_sort/) |
+| **Selection Sort** | Сортировка выбором | [Открыть](algorithms/sorting/selection_sort/) |
+| **Merge Sort** | Сортировка слиянием | [Открыть](algorithms/sorting/merge_sort/) |
+| **Quick Sort** | Быстрая сортировка | [Открыть](algorithms/sorting/quick_sort/) |
+| **Heap Sort** | Сортировка через кучу | [Открыть](algorithms/sorting/heap_sort/) |
+| **Binary Search** | Алгоритм двоичного поиска | [Открыть](algorithms/searching/binary_search/) |
 
 ## Требования
 

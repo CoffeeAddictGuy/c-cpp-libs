@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef enum { HT_MODE_MAP, HT_MODE_MULTIMAP } HTMode;
+
 typedef struct HashNode {
   char *key;
   int value;
@@ -17,11 +19,12 @@ typedef struct {
   HashNode **buckets;
   size_t capacity;
   size_t size;
+  HTMode mode;
 } HashTable;
 
 unsigned int hash_func(const char *key, size_t table_size);
 
-HashTable *ht_init(size_t capacity);
+HashTable *ht_init(size_t capacity, HTMode mode);
 HashTable *ht_insert(HashTable *ht, char *key, int value);
 void *ht_delete(HashTable *ht, char *key, int value);
 

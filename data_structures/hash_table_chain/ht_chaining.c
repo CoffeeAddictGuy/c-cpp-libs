@@ -10,7 +10,7 @@ unsigned int hash_func(const char *key, size_t table_size) {
   return hash % table_size;
 }
 
-HashTable *ht_init(size_t capacity) {
+HashTable *ht_init(size_t capacity, HTMode mode) {
   HashTable *ht = (HashTable *)malloc(sizeof(HashTable));
   if (ht == NULL) {
     return NULL;
@@ -39,8 +39,10 @@ HashTable *ht_insert(HashTable *ht, char *key, int value) {
   HashNode *curr = ht->buckets[index];
   while (curr != NULL) {
     if (strcmp(curr->key, key) == 0) {
-      curr->value = value;
-      return ht;
+      if (ht->mode == HT_MODE_MAP) {
+        curr->value = value;
+        return ht;
+      }
     }
     curr = curr->next;
   }

@@ -1,4 +1,6 @@
+#pragma once
 #include "../hash_table_chain/ht_chaining.h"
+#include <stdbool.h>
 
 typedef struct {
   HashTable *adjacency;

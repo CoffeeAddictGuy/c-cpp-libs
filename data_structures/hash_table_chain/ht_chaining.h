@@ -29,3 +29,5 @@ HashTable *ht_insert(HashTable *ht, char *key, int value);
 void *ht_delete(HashTable *ht, char *key, int value);
 
 HashResult hn_search(HashNode *hn, char *key, int value);
+
+void ht_free(HashTable *ht);

@@ -53,7 +53,7 @@ HashTable *ht_insert(HashTable *ht, char *key, int value) {
     return NULL;
   }
   n->value = value;
-  n->key = key;
+  n->key = _strdup(key);
   n->next = in_buckets;
   ht->buckets[index] = n;
   return ht;
@@ -94,4 +94,18 @@ HashResult hn_search(HashNode *hn, char *key, int value) {
     hn = hn->next;
   }
   return (HashResult){NULL, NULL};
+}
+
+void ht_free(HashTable *ht) {
+  for (size_t i = 0; i < ht->capacity; i++) {
+    HashNode *curr = ht->buckets[i];
+    while (curr) {
+      HashNode *next = curr->next;
+      free(curr->key);
+      free(curr);
+      curr = next;
+    }
+  }
+  free(ht->buckets);
+  free(ht);
 }

@@ -1,13 +1,21 @@
 #include "bfs.h"
 
-void bfs(Graph *g, size_t source, size_t destination) {
+BFSResult bfs(Graph *g, size_t source, size_t destination) {
   Queue *q = q_init(10);
   if (q == NULL) {
-    return;
+    return (BFSResult){.found = false};
   }
-  bool visited[100] = {0};
+
+  BFSState state = {0};
+  BFSResult result = {0};
+
+  // bool visited[100] = {0};
   q_write(q, source);
-  visited[source] = true;
+  // visited[source] = true;
+  state.visited[source] = true;
+  state.parent[source] = -1; // Начало пути
+
+  printf("BFS: %zu -> %zu\n", source, destination);
 
   while (q_size(q).result != 0) {
     int curr = q_read(q).result;
@@ -15,7 +23,18 @@ void bfs(Graph *g, size_t source, size_t destination) {
     printf("Visit: %d\n", curr);
     if (curr == destination) {
       printf("Found destination!\n");
-      break;
+      result.found = true;
+
+      // Восстанавливаем путь
+      size_t idx = 0;
+      size_t current = destination;
+      while (current != (size_t)-1) {
+        result.path[idx++] = current;
+        current = state.parent[current];
+      }
+      result.path_length = idx;
+      q_free(q);
+      return result;
     }
 
     size_t neighbors[10];
@@ -23,10 +42,17 @@ void bfs(Graph *g, size_t source, size_t destination) {
 
     for (size_t i = 0; i < count; i++) {
       size_t next = neighbors[i];
-      if (!visited[next]) {
+      if (next >= 100) {
+        continue;
+      }
+      if (!state.visited[next]) {
         q_write(q, next);
-        visited[next] = true;
+        state.visited[next] = true;
+        state.parent[next] = curr;
       }
     }
   }
+  printf("No path found\n");
+  q_free(q);
+  return result; // Не найден
 }

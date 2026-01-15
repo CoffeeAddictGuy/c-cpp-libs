@@ -1,47 +1,47 @@
 #include "bfs.h"
 
 BFSResult bfs(Graph *g, size_t source, size_t destination) {
-  Queue *q = q_init(10);
+  BFSResult result = {false, NULL, NULL};
+  if (g == NULL) {
+    return result;
+  }
+  if (g->num_vertices > 100) {
+    printf("Vertices more than 100!");
+    return result;
+  }
+
+  Queue *q = q_init(g->num_vertices);
   if (q == NULL) {
-    return (BFSResult){.found = false};
+    return result;
   }
 
   BFSState state = {0};
-  BFSResult result = {0};
-
-  q_write(q, source);
   state.visited[source] = true;
   state.parent[source] = -1;
 
-  printf("BFS: %zu -> %zu\n", source, destination);
-
-  while (q_size(q).result != 0) {
+  q_write(q, source);
+  printf("BFS start searching path from %lld to %lld\n", source, destination);
+  while (q_read(q).code != -1) {
     int curr = q_read(q).result;
-
-    printf("Visit: %d\n", curr);
     if (curr == destination) {
-      printf("Found destination!\n");
+      printf("Path found!\n");
       result.found = true;
-
       size_t idx = 0;
-      size_t current = destination;
-      while (current != (size_t)-1) {
-        result.path[idx++] = current;
-        current = state.parent[current];
+      size_t path_curr = destination;
+      while (path_curr != (size_t)-1) {
+        result.path[idx++] = path_curr;
+        path_curr = state.parent[path_curr];
       }
       result.path_length = idx;
       q_free(q);
       return result;
     }
 
-    size_t neighbors[10];
-    size_t count = graph_get_neighbors(g, curr, neighbors, 10);
+    size_t neighborn[10];
+    int neighborn_cnt = graph_get_neighbors(g, curr, neighborn, 10);
 
-    for (size_t i = 0; i < count; i++) {
-      size_t next = neighbors[i];
-      if (next >= 100) {
-        continue;
-      }
+    for (int i = 0; i < neighborn_cnt; i++) {
+      size_t next = neighborn[i];
       if (!state.visited[next]) {
         q_write(q, next);
         state.visited[next] = true;
@@ -49,7 +49,7 @@ BFSResult bfs(Graph *g, size_t source, size_t destination) {
       }
     }
   }
-  printf("No path found\n");
+  printf("No path found!\n");
   q_free(q);
   return result;
 }

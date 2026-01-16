@@ -21,8 +21,9 @@ BFSResult bfs(Graph *g, size_t source, size_t destination) {
 
   q_write(q, source);
   printf("BFS start searching path from %lld to %lld\n", source, destination);
-  while (q_read(q).code != -1) {
-    int curr = q_read(q).result;
+  Result res = q_read(q);
+  while (res.code != -1) {
+    int curr = res.result;
     if (curr == destination) {
       printf("Path found!\n");
       result.found = true;
@@ -48,6 +49,7 @@ BFSResult bfs(Graph *g, size_t source, size_t destination) {
         state.parent[next] = curr;
       }
     }
+    res = q_read(q);
   }
   printf("No path found!\n");
   q_free(q);

@@ -1,4 +1,18 @@
 #include "ht_chaining.h"
+#include <string.h>
+
+#define MAX_STR_LEN 256
+
+char *str_dublicator(char *src) {
+  static char new[MAX_STR_LEN];
+  size_t src_size = strlen(src);
+  if (src_size > MAX_STR_LEN) {
+    return src;
+  }
+  memcpy(new, src, src_size);
+  new[src_size + 1] = '\0';
+  return new;
+}
 
 unsigned int hash_func(const char *key, size_t table_size) {
   unsigned long hash = 5381;
@@ -18,6 +32,7 @@ HashTable *ht_init(size_t capacity, HTMode mode) {
 
   ht->capacity = capacity;
   ht->size = 0;
+  ht->mode = mode;
 
   ht->buckets = (HashNode **)calloc(capacity, sizeof(HashNode *));
 
@@ -53,7 +68,7 @@ HashTable *ht_insert(HashTable *ht, char *key, int value) {
     return NULL;
   }
   n->value = value;
-  n->key = _strdup(key);
+  n->key = str_dublicator(key);
   n->next = in_buckets;
   ht->buckets[index] = n;
   return ht;
